@@ -14,23 +14,6 @@ async function getAverage(req: Request, res: Response): Promise<void> {
     dataArray.length
 
   console.log(average)
-
-  // const fs = require('fs')
-  // const JSONStream = require('JSONStream')
-  // let sum: number = 0
-  // let count: number = 0
-  // const readable = fs.createReadStream(dataPath, {
-  //   encoding: 'utf8',
-  //   highWaterMark: 10,
-  // })
-  // const parser = JSONStream.parse('.')
-  // readable.pipe(parser)
-  // parser.on('data', function (data: any) {
-  //   // sum += data.properties[property]
-  //   // count += 1
-  //   console.log(data.properties[property])
-  // })
-  // console.log(count)
 }
 
 export default getAverage

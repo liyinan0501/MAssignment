@@ -8,14 +8,23 @@ async function getRank(req: Request, res: Response): Promise<void> {
   const itemNo: number = parseInt(req.query.itemNo as string)
   const deviceNames: Array<string> = ['Ios', 'Android']
 
-  // console.log(typeof property)
-  // const property = 'scoreA'
   const newArray = dataArray
     .filter((item: any) => item.deviceProps.type === deviceNames[itemNo - 1])
     .map((item: any) => item.properties[property])
-  // console.log(typeof itemNo) // number
-  // console.log(itemNo - 1) // NaN
   console.log(newArray)
+  console.log(getMaxes(newArray, 100))
+
+  function getMaxes(input: Array<number>, count: number) {
+    let output: Array<number> = []
+    for (let i = 0; i < input.length; i++) {
+      output.push(input[i])
+      if (output.length > count) {
+        output.sort((a, b) => b - a)
+        output.pop()
+      }
+    }
+    return output
+  }
 }
 
 export default getRank
