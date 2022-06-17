@@ -6,11 +6,16 @@ async function getRank(req: Request, res: Response): Promise<void> {
   //* Example query: http://localhost:3000/get-rank?param=scoreA&itemNo=2
   const property = String(req.query.param)
   const itemNo = parseInt(req.query.itemNo as string)
-  const deviceNames: Array<string> = ['Ios', 'Android']
+
+  enum DeviceNames {
+    Ios = 1,
+    Android,
+  }
 
   const newArray = dataArray
-    .filter((item: any) => item.deviceProps.type === deviceNames[itemNo - 1])
+    .filter((item: any) => item.deviceProps.type === DeviceNames[itemNo])
     .map((item: any) => item.properties[property])
+  console.log(newArray)
 
   const getMaxes = (input: Array<number>, count: number) => {
     let output: Array<number> = []

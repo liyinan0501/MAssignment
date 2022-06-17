@@ -15,6 +15,7 @@ async function getData(req: Request, res: Response): Promise<void> {
   readable.pipe(parser)
   const date: undefined | string = req.params.date
   const reg = /^\d{4}-\d{1,2}-\d{1,2}/
+
   if (date) {
     const regDate: any = date.match(reg)
     parser.on('data', (data: IMeasurement) => {
