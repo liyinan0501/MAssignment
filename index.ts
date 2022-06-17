@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000
 
 app.use(bodyParser.json())
 
-app.get('/get-data', getData)
+app.get(['/get-data', '/get-data/:date'], getData)
 app.get('/get-average/:pro', getAverage)
 app.get('/get-rank', getRank)
 
