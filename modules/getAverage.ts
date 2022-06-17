@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import IMeasurement from '../Interfaces/Measurement'
 import dataArray from '../modules/dataArray'
 import dataPath from './dataPath'
 
@@ -27,7 +28,7 @@ async function getAverage(req: Request, res: Response): Promise<void> {
     sum += data.properties[property]
     count += 1
     average = sum / count
-    console.log(average)
+    console.log(`Current Average: ${average}`)
   })
 }
 

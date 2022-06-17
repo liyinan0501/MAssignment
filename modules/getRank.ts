@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import dataArray from '../modules/dataArray'
+import IMeasurement from '../Interfaces/Measurement'
 
 async function getRank(req: Request, res: Response): Promise<void> {
   // Rank top 10 records
@@ -13,9 +14,10 @@ async function getRank(req: Request, res: Response): Promise<void> {
   }
 
   const newArray = dataArray
-    .filter((item: any) => item.deviceProps.type === DeviceNames[itemNo])
+    .filter(
+      (item: IMeasurement) => item.deviceProps.type === DeviceNames[itemNo]
+    )
     .map((item: any) => item.properties[property])
-  console.log(newArray)
 
   const getMaxes = (input: Array<number>, count: number) => {
     let output: Array<number> = []
@@ -28,7 +30,7 @@ async function getRank(req: Request, res: Response): Promise<void> {
     }
     return output
   }
-  console.log(getMaxes(newArray, 100)) // hoisting
+  console.log(`Top 10: ${getMaxes(newArray, 10)}`) // hoisting
 }
 
 export default getRank
