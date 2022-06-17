@@ -1,7 +1,5 @@
 import { Request, Response } from 'express'
 import dataArray from '../modules/dataArray'
-import dataPath from './dataPath'
-import IMeasurement from '../Interfaces/Measurement'
 
 async function getAverage(req: Request, res: Response): Promise<void> {
   // calculate Average of requested property according to filters
