@@ -20,3 +20,5 @@ app.get('**', (_, res) => {
 app.listen(port, async () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+//npx nodemon index.ts

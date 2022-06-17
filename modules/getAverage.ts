@@ -1,13 +1,17 @@
 import { Request, Response } from 'express'
+import dataArray from '../modules/dataArray'
 
 async function getAverage(req: Request, res: Response): Promise<void> {
   // calculate Average of requested property according to filters
-  // npx nodemon index.ts
+  // Example query: http://localhost:3000/get-average/scoreA
   const property = req.params.pro
-  console.log(property)
-  let property1: string = req.params.pro
-  console.log(property1)
-  // const average: number = data.map()
+  const average: number =
+    dataArray
+      .map((item: any) => item.properties[property])
+      .reduce((prevVal: number, currVal: number) => prevVal + currVal, 0) /
+    dataArray.length
+
+  console.log(average)
 }
 
 export default getAverage
