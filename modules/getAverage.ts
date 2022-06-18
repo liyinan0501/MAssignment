@@ -46,6 +46,7 @@ async function getAverage(req: Request, res: Response): Promise<void> {
       // 10M.json: 49998.830288
     })
     .pipe(parser)
+
   parser.on('data', (data: { [key: string]: { [key: string]: number } }) => {
     sum += data.properties[property]
     count += 1
