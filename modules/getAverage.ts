@@ -8,7 +8,7 @@ async function getAverage(req: Request, res: Response): Promise<void> {
 
   const property = req.params.pro
 
-  //* Method 1 - Using array methods
+  //* Solution 1 - Using array methods
   // Advantage:
   // Using array methods solution for solving 1M.json is much faster than using the stream.
   // Disadvantage:
@@ -22,7 +22,7 @@ async function getAverage(req: Request, res: Response): Promise<void> {
   // console.log(average)
   // 1M.json:49976.86384 (≈ under 1 second)
 
-  //* Method 2 - Using stream
+  //* Solution 2 - Using stream
   // Advantage:
   // Using stream can solve 10M.json.
   // Disadvantage:
