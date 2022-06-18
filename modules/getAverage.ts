@@ -10,7 +10,7 @@ async function getAverage(req: Request, res: Response): Promise<void> {
 
   //* Method 1 - Using array methods
   // Advantage:
-  // Using array methods solution for solving 1M.json is more faster than using the stream.
+  // Using array methods solution for solving 1M.json is much faster than using the stream.
   // Disadvantage:
   // Using array methods can not solve over 2 GB file.
 
@@ -26,7 +26,7 @@ async function getAverage(req: Request, res: Response): Promise<void> {
   // Advantage:
   // Using stream can solve 10M.json.
   // Disadvantage:
-  // Using stream solution for solving 1M.json is more slower than using array methods.
+  // Using the stream solution for solving 1M.json is much slower than using array methods.
   const fs = require('fs')
   const JSONStream = require('JSONStream')
   const readable = fs.createReadStream(dataPath, {
