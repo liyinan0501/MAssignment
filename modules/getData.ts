@@ -7,7 +7,7 @@ async function getData(req: Request, res: Response): Promise<void> {
   //* Example query: http://localhost:3000/get-data
   //* Example query: http://localhost:3000/get-data/2022-06-04T17:58:53.589Z
 
-  // Method: Using stream
+  // Solution: Using stream
   // Both 1M and 10M json are quite a big dataset, it's better to read the content piece by piece.
   // Do not one time read the whole file.
   // Using stream is a proper solution for reading large json files.
