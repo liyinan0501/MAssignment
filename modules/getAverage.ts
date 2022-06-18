@@ -20,7 +20,7 @@ async function getAverage(req: Request, res: Response): Promise<void> {
   //     .reduce((prevVal: number, currVal: number) => prevVal + currVal, 0) /
   //   dataArray.length
   // console.log(average)
-  // 1M.json:49976.86384 (≈under 1 second)
+  // 1M.json:49976.86384 (≈ under 1 second)
 
   //* Method 2 - Using stream
   // Advantage:
@@ -37,11 +37,11 @@ async function getAverage(req: Request, res: Response): Promise<void> {
     average = 0
   const parser = JSONStream.parse('.')
   readable
-    .on('end', (data: number) => {
+    .on('end', () => {
       average = sum / count
       console.log(average)
-      // 1M.json:49976.86384 (≈40 seconds)
-      // 10M.json: 49998.830288 (≈6 min 45 seconds)
+      // 1M.json:49976.86384 (≈ 40 seconds)
+      // 10M.json: 49998.830288 (≈ 6 min 45 seconds)
     })
     .pipe(parser)
   parser.on('data', (data: any) => {
