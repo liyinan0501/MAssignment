@@ -14,7 +14,7 @@ async function getRank(req: Request, res: Response): Promise<void> {
     Android,
   }
 
-  //* Method 1 - Using array methods
+  //* Solution 1 - Using array methods
   // Advantage:
   // Using array methods solution for solving 1M.json is much faster than using the stream.
   // Disadvantage:
@@ -28,7 +28,7 @@ async function getRank(req: Request, res: Response): Promise<void> {
   // console.log(`Top 10: ${getMaxes(newArray, 10)}`) // hoisting
   // 1M.json: 99999,99999,99999,99999,99999,99998,99998,99998,99998,99998 (≈ under 1 second)
 
-  //* Method 2 - Using stream
+  //* Solution 2 - Using stream
   // Advantage:
   // Using stream can solve 10M.json.
   // Disadvantage:
