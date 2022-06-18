@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import IMeasurement from '../Interfaces/Measurement'
 import dataArray from '../modules/dataArray'
 import dataPath from './dataPath'
 
@@ -20,7 +21,7 @@ async function getAverage(req: Request, res: Response): Promise<void> {
   //     .reduce((prevVal: number, currVal: number) => prevVal + currVal, 0) /
   //   dataArray.length
   // console.log(average)
-  // 1M.json:49976.86384 (≈ under 1 second)
+  // 1M.json:49976.86384
 
   //* Solution 2 - Using stream
   // Advantage:
@@ -39,12 +40,13 @@ async function getAverage(req: Request, res: Response): Promise<void> {
   readable
     .on('end', () => {
       average = sum / count
-      console.log(average)
-      // 1M.json:49976.86384 (≈ 40 seconds)
-      // 10M.json: 49998.830288 (≈ 6 min 45 seconds)
+      // console.log(average)
+      res.send(`${property} Average: ${average}`)
+      // 1M.json:49976.86384
+      // 10M.json: 49998.830288
     })
     .pipe(parser)
-  parser.on('data', (data: any) => {
+  parser.on('data', (data: { [key: string]: { [key: string]: number } }) => {
     sum += data.properties[property]
     count += 1
   })
