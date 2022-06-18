@@ -45,8 +45,8 @@ async function getRank(req: Request, res: Response): Promise<void> {
   //   .on('end', () => {
   //     // console.log(`Top 10: ${getMaxes(newArray, 10)}`)
   //     res.send(`Top 10: ${getMaxes(newArray, 10)}`)
-  //     // 1M.json: 99999,99999,99999,99999,99999,99998,99998,99998,99998,99998 (≈ 40 seconds)
-  //     // 10M.json: 99999,99999,99999,99999,99999,99999,99999,99999,99999,99999 (≈ 6 min 50 seconds)
+  //     // 1M.json: 99999,99999,99999,99999,99999,99998,99998,99998,99998,99998
+  //     // 10M.json: 99999,99999,99999,99999,99999,99999,99999,99999,99999,99999
   //   })
   //   .pipe(parser)
   // parser.on('data', (data: any) => {
