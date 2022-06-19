@@ -25,7 +25,7 @@ async function getData(req: Request, res: Response): Promise<void> {
   if (date) {
     const regDate: any = date.match(reg)
     parser.on('data', (data: IMeasurement) => {
-      if (data['timestamp'].includes(regDate)) {
+      if (data.timestamp.includes(regDate)) {
         console.log(data)
       }
     })
