@@ -40,15 +40,14 @@ async function getAverage(req: Request, res: Response): Promise<void> {
   readable
     .on('end', () => {
       average = sum / count
-      // console.log(average)
       res.send(`${property} Average: ${average}`)
       // 1M.json:49976.86384
       // 10M.json: 49998.830288
     })
     .pipe(parser)
 
-  parser.on('data', (data: { [key: string]: { [key: string]: number } }) => {
-    sum += data.properties[property]
+  parser.on('data', function (data: IMeasurement) {
+    sum += (data.properties as any)[property]
     count += 1
   })
 }
