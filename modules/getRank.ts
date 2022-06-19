@@ -28,33 +28,6 @@ async function getRank(req: Request, res: Response): Promise<void> {
   // console.log(`Top 10: ${getMaxes(newArray, 10)}`)
   // 1M.json: 99999,99999,99999,99999,99999,99998,99998,99998,99998,99998 (≈ under 1 second)
 
-  //* Solution 2 - Using stream
-  // Advantage:
-  // Using stream can solve 10M.json.
-  // Disadvantage:
-  // Using the stream solution for solving 1M.json is much slower than using array methods.
-
-  // const fs = require('fs')
-  // const JSONStream = require('JSONStream')
-  // const readable = fs.createReadStream(dataPath, {
-  //   encoding: 'utf8',
-  // })
-  // const newArray: Array<number> = []
-  // const parser = JSONStream.parse('.')
-  // readable
-  //   .on('end', () => {
-  //     // console.log(`Top 10: ${getMaxes(newArray, 10)}`)
-  //     res.send(`Top 10: ${getMaxes(newArray, 10)}`)
-  //     // 1M.json: 99999,99999,99999,99999,99999,99998,99998,99998,99998,99998
-  //     // 10M.json: 99999,99999,99999,99999,99999,99999,99999,99999,99999,99999
-  //   })
-  //   .pipe(parser)
-  // parser.on('data', (data: any) => {
-  //   if (data.deviceProps.type === DeviceNames[itemNo]) {
-  //     newArray.push(data.properties[property])
-  //   }
-  // })
-
   // function getMaxes(input: Array<number>, count: number) {
   //   let output: Array<number> = []
   //   for (let i = 0; i < input.length; i++) {
@@ -67,6 +40,12 @@ async function getRank(req: Request, res: Response): Promise<void> {
   //   return output
   // }
 
+  //* Solution 2 - Using stream
+  // Advantage:
+  // Using stream can solve 10M.json.
+  // Disadvantage:
+  // Using the stream solution for solving 1M.json is much slower than using array methods.
+
   let rankArray = new Array(10).fill(0)
   const fs = require('fs')
   const JSONStream = require('JSONStream')
@@ -78,13 +57,18 @@ async function getRank(req: Request, res: Response): Promise<void> {
   readable
     .on('end', () => {
       res.send(rankArray)
+      // 1M.json: 99999,99999,99999,99999,99999,99998,99998,99998,99998,99998
+      // 10M.json: 99999,99999,99999,99999,99999,99999,99999,99999,99999,99999
     })
     .pipe(parser)
-  parser.on('data', (data: { [key: string]: { [key: string]: string } }) => {
+  // parser.on('data', (data: { [key: string]: { [key: string]: string } }) => {
+  parser.on('data', (data: IMeasurement) => {
     if (data.deviceProps.type === DeviceNames[itemNo]) {
       rankArray.sort((a, b) => b - a)
-      if (data.properties[property] > rankArray[rankArray.length - 1]) {
-        rankArray[rankArray.length - 1] = data.properties[property]
+      if (
+        (data.properties as any)[property] > rankArray[rankArray.length - 1]
+      ) {
+        rankArray[rankArray.length - 1] = (data.properties as any)[property]
       }
     }
   })
