@@ -61,7 +61,7 @@ async function getRank(req: Request, res: Response): Promise<void> {
       // 10M.json: 99999,99999,99999,99999,99999,99999,99999,99999,99999,99999
     })
     .pipe(parser)
-  // parser.on('data', (data: { [key: string]: { [key: string]: string } }) => {
+
   parser.on('data', (data: IMeasurement) => {
     if (data.deviceProps.type === DeviceNames[itemNo]) {
       rankArray.sort((a, b) => b - a)
